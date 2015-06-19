@@ -164,6 +164,28 @@
         },
         "group": "reset"
       },
+      "git_stash_pop": {
+        "type": "function",
+        "file": "stash.h",
+        "args": [
+          {
+            "name": "repo",
+            "type": "git_repository *"
+          },
+          {
+            "name": "index",
+            "type": "size_t"
+          },
+          {
+            "name": "options",
+            "type": "git_stash_apply_options *"
+          }
+        ],
+        "return": {
+          "type": "int"
+        },
+        "group": "stash"
+      },
       "git_stash_save": {
         "type": "function",
         "file": "stash.h",
@@ -327,6 +349,44 @@
         }
       ],
       [
+        "git_stash_apply_options",
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "unsigned int",
+              "name": "version"
+            },
+            {
+              "type": "git_stash_apply_flags_t",
+              "name": "flags"
+            },
+            {
+              "type": "git_checkout_options *",
+              "name": "git_checkout_options"
+            },
+            {
+              "type": "unsigned int",
+              "name": "target_limit"
+            },
+            {
+              "type": "git_diff_similarity_metric *",
+              "name": "metric",
+              "ignore": true
+            },
+            {
+              "type": "git_merge_file_favor_t",
+              "name": "file_favor"
+            }
+          ],
+          "used": {
+            "needs": [
+              "git_stash_apply_init_options"
+            ]
+          }
+        }
+      ],
+      [
         "git_off_t",
         {
           "type": "enum"
@@ -370,6 +430,12 @@
             }
           ],
           "comments": ""
+        }
+      ],
+      [
+        "git_stash_apply_progress_t",
+        {
+          "type": "enum"
         }
       ],
       [
@@ -527,7 +593,8 @@
       "git_reset"
     ],
     "stash": [
-      "git_stash_save"
+      "git_stash_save",
+      "git_stash_pop"
     ]
   }
 }
